@@ -14,10 +14,10 @@ An interactive schematic viewer and netlist analysis plugin for Yosys.
 ![Router Top](images/router_top.png)
 
 ### Hierarchical Top-Level Module (Router1x3)
-![Router Top Hierarchical](images/router_top_hierarchical.png)
+![Router Top Hierarchical](images/hierarchical.png)
 
 ### FSM Submodule Gate-Level Logic
-![Router FSM Schematic](images/router_fsm_schematic.png)
+![Router FSM Schematic](images/fsm.png)
 
 ## Features
 
