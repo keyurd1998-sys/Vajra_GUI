@@ -2,7 +2,7 @@
 
 [![Yosys](https://img.shields.io/badge/Yosys-Plugin-orange.svg)](https://github.com/YosysHQ/yosys)
 [![C++](https://img.shields.io/badge/C%2B%2B-20-blue.svg)](https://isocpp.org/)
-[![Qt](https://img.shields.io/badge/GUI-Qt5-darkgreen.svg)](https://www.qt.io/)
+[![Qt](https://img.shields.io/badge/GUI-Qt5%20%7C%20Qt6-darkgreen.svg)](https://www.qt.io/)
 [![Build](https://img.shields.io/badge/Build-CMake-lightgrey.svg)](https://cmake.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
@@ -25,19 +25,29 @@ An interactive schematic viewer and netlist analysis plugin for Yosys.
 - Dockable Hierarchy Tree and Property Inspector with bidirectional net highlighting.
 - High-resolution schematic export to SVG, PDF, and PNG formats.
 - Embedded dark theme canvas with smooth pan, zoom, and selection controls.
+- Portable build system supporting Qt5 and Qt6 across Linux distributions.
 
 ## Prerequisites
 
-- C++20 compatible compiler (GCC >= 11 or Clang >= 13)
+- C++20 compatible compiler (GCC >= 10, Clang >= 11)
 - CMake (>= 3.20)
 - Yosys (>= 0.60)
-- Qt5 libraries:
+- Qt5 or Qt6 development packages:
 
 ```bash
+# Ubuntu / Debian (Qt5)
 sudo apt install qtbase5-dev libqt5svg5-dev
+
+# Ubuntu 24.04+ / Debian (Qt6)
+sudo apt install qt6-base-dev libqt6svg6-dev
+
+# Fedora
+sudo dnf install qt5-qtbase-devel qt5-qtsvg-devel
 ```
 
 ## Build and Installation
+
+### Option A: Standard Build (System Install)
 
 ```bash
 git clone https://github.com/keyurd1998-sys/Vajra_GUI.git
@@ -48,6 +58,39 @@ sudo cmake --install build
 ```
 
 This compiles `vajra.so` and installs it into Yosys's default plugin directory.
+
+### Option B: User-Space Build (No Root / No Sudo Required)
+
+If you do not have root or sudo privileges:
+
+```bash
+git clone https://github.com/keyurd1998-sys/Vajra_GUI.git
+cd Vajra_GUI
+cmake -B build .
+cmake --build build --parallel
+```
+
+Load the plugin directly via environment variable without installing to system folders:
+
+```bash
+export YOSYS_PLUGIN_PATH=$PWD/build
+yosys -m vajra
+```
+
+Or pass the direct path:
+
+```bash
+yosys -m ./build/vajra.so
+```
+
+### Option C: With Pre-Compiled Yosys (OSS CAD Suite / Custom Path)
+
+If using OSS CAD Suite or a custom Yosys build, point CMake to its `yosys-config`:
+
+```bash
+cmake -B build -DYOSYS_CONFIG=/path/to/oss-cad-suite/bin/yosys-config .
+cmake --build build --parallel
+```
 
 ## Usage
 
@@ -91,7 +134,7 @@ gui -lib $LIB_TYPICAL
 
 ### 4. Headless Schematic Export
 
-Export schematics without opening an interactive window:
+Export schematics without opening an interactive window (works on headless servers without a DISPLAY):
 
 ```bash
 yosys -m vajra -p "read_verilog counter.v; proc; opt; gui -export counter.svg"
@@ -106,7 +149,7 @@ cd examples/router1x3
 ./run.sh
 ```
 
-This runs `synth.ys`, synthesizes the multi-module router design, and exports schematics for top-level and submodules into `images/`.
+This synthesizes the multi-module router design and exports schematics for top-level and submodules into `images/`.
 
 ## Command Options
 

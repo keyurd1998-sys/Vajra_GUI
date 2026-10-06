@@ -1,6 +1,6 @@
 #include "vajra/core/logger.hpp"
 
-#include <format>
+#include <cstdio>
 #include <iostream>
 
 namespace vajra::core {
@@ -115,8 +115,10 @@ void Logger::log_formatted(Severity sev, int code, std::string_view msg) {
         break;
     }
 
-    std::string header = std::format("[VAJRA-{}-{:03d}]", sev_tag, code);
-    std::string plain_line = std::format("{} {}\n", header, msg);
+    char hdr_buf[64];
+    std::snprintf(hdr_buf, sizeof(hdr_buf), "[VAJRA-%s-%03d]", sev_tag.c_str(), code);
+    std::string header(hdr_buf);
+    std::string plain_line = header + " " + std::string(msg) + "\n";
 
     // Mirror to transcript
     if (transcript_.is_open()) {
