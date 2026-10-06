@@ -145,11 +145,10 @@ yosys -m vajra -p "read_verilog counter.v; proc; opt; gui -export counter.svg"
 
 ## Examples
 
-A complete example using the `Router1x3` design is provided in `examples/router1x3/`:
+A complete example using the `Router1x3` design is provided in `examples/`:
 
 ```bash
-cd examples/router1x3
-./run.sh
+yosys -m ./build/vajra.so -p "read_verilog examples/router_top.v; hierarchy -check -top router_top; proc; opt; gui"
 ```
 
 This synthesizes the multi-module router design and exports schematics for top-level and submodules into `images/`.
