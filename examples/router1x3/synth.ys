@@ -14,18 +14,5 @@ hierarchy -check -top router_top
 # Convert processes to netlist elements and perform optimizations
 proc; opt
 
-# Export top-level hierarchical block schematic
-gui -top router_top -export ../../images/router_top_hierarchical.svg
-gui -top router_top -export ../../images/router_top_hierarchical.png
-
-# Export FSM submodule schematic
-gui -top router_fsm -export ../../images/router_fsm_schematic.svg
-gui -top router_fsm -export ../../images/router_fsm_schematic.png
-
-# Export Synchronizer submodule schematic
-gui -top router_sync -export ../../images/router_sync_schematic.svg
-gui -top router_sync -export ../../images/router_sync_schematic.png
-
-# Export Register submodule schematic
-gui -top router_reg -export ../../images/router_reg_schematic.svg
-gui -top router_reg -export ../../images/router_reg_schematic.png
+# Launch GUI
+gui 

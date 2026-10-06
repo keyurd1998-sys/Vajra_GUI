@@ -10,6 +10,9 @@ An interactive schematic viewer and netlist analysis plugin for Yosys.
 
 ## Screenshots
 
+### TOP-Level box view
+![Router Top](images/router_top.png)
+
 ### Hierarchical Top-Level Module (Router1x3)
 ![Router Top Hierarchical](images/router_top_hierarchical.png)
 
