@@ -8,6 +8,14 @@
 
 An interactive schematic viewer and netlist analysis plugin for Yosys.
 
+## Screenshots
+
+### Hierarchical Top-Level Module (Router1x3)
+![Router Top Hierarchical](images/router_top_hierarchical.png)
+
+### FSM Submodule Gate-Level Logic
+![Router FSM Schematic](images/router_fsm_schematic.png)
+
 ## Features
 
 - Native ANSI/IEEE vector gate rendering for unmapped GTECH and RTLIL primitives.
@@ -32,8 +40,8 @@ sudo apt install qtbase5-dev libqt5svg5-dev
 ## Build and Installation
 
 ```bash
-git clone https://github.com/keyurd1998-sys/vajra_gui.git
-cd vajra_gui
+git clone https://github.com/keyurd1998-sys/Vajra_GUI.git
+cd Vajra_GUI
 cmake -B build .
 cmake --build build --parallel
 sudo cmake --install build
@@ -88,6 +96,17 @@ Export schematics without opening an interactive window:
 ```bash
 yosys -m vajra -p "read_verilog counter.v; proc; opt; gui -export counter.svg"
 ```
+
+## Examples
+
+A complete example using the `Router1x3` design is provided in `examples/router1x3/`:
+
+```bash
+cd examples/router1x3
+./run.sh
+```
+
+This runs `synth.ys`, synthesizes the multi-module router design, and exports schematics for top-level and submodules into `images/`.
 
 ## Command Options
 
